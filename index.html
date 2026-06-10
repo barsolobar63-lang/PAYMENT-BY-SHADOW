@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Shadow Kernel</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:url('poto.jpg') center/cover fixed;
+    min-height:100vh;
+    color:white;
+}
+
+/* LOADING */
+.loader{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+}
+
+.spinner{
+    width:80px;
+    height:80px;
+    border:6px solid #333;
+    border-top:6px solid gold;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+.loader h2{
+    margin-top:20px;
+    color:gold;
+    text-shadow:0 0 20px gold;
+}
+
+@keyframes spin{
+    100%{transform:rotate(360deg);}
+}
+
+/* DASHBOARD */
+.container{
+    max-width:900px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.card{
+    background:rgba(0,0,0,.75);
+    backdrop-filter:blur(10px);
+    border:2px solid gold;
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 0 30px rgba(255,215,0,.5);
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.profile img{
+    width:120px;
+    height:120px;
+    border-radius:50%;
+    border:3px solid gold;
+    object-fit:cover;
+}
+
+.profile h1{
+    color:gold;
+    text-shadow:0 0 15px gold;
+}
+
+.payment-box{
+    margin-top:20px;
+    padding:20px;
+    border-radius:15px;
+    background:rgba(255,215,0,.1);
+    border:1px solid gold;
+}
+
+.payment-box h2{
+    color:gold;
+    margin-bottom:10px;
+}
+
+.copy-btn,
+.wa-btn{
+    width:100%;
+    padding:15px;
+    margin-top:15px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.copy-btn{
+    background:gold;
+    color:black;
+}
+
+.copy-btn:hover{
+    transform:scale(1.03);
+}
+
+.wa-btn{
+    background:#25D366;
+    color:white;
+}
+
+.popup{
+    position:fixed;
+    top:20px;
+    right:20px;
+    background:gold;
+    color:black;
+    padding:15px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    display:none;
+    animation:slide .4s;
+}
+
+@keyframes slide{
+    from{
+        transform:translateX(100px);
+        opacity:0;
+    }
+    to{
+        transform:translateX(0);
+        opacity:1;
+    }
+}
+
+.notice{
+    margin-top:20px;
+    color:#fff;
+    line-height:1.8;
+    text-align:center;
+}
+
+.qris{
+    width:250px;
+    display:block;
+    margin:20px auto;
+    border-radius:15px;
+    border:3px solid gold;
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+    <div class="spinner"></div>
+    <h2>Selamat Datang Di Website Payment By Shadow Kernel</h2>
+</div>
+
+<div class="popup" id="popup"></div>
+
+<div class="container">
+    <div class="card">
+
+        <div class="profile">
+            <img src="poto.jpg" alt="Profile">
+            <div>
+                <h1>SHADOW KERNEL PAYMENT</h1>
+                <p>Website Payment Resmi</p>
+            </div>
+        </div>
+
+        <div class="payment-box">
+            <h2>💰 PAYMENT DANA</h2>
+
+            <p><b>Nomor DANA:</b></p>
+            <h3 id="dana">083182386351</h3>
+
+            <p>A/N : YULIINDRIYATI</p>
+
+            <button class="copy-btn" onclick="copyDana()">
+                📋 Salin Nomor DANA
+            </button>
+        </div>
+
+        <div class="payment-box">
+            <h2>📷 QRIS</h2>
+
+            <!-- Ganti dengan QRIS milik kamu -->
+            <img class="qris" src="Qris.jpeg?text=UPLOAD+QRIS" alt="QRIS">
+        </div>
+
+        <a href="https://wa.me/6283182386351" target="_blank">
+            <button class="wa-btn">
+                📱 Hubungi Admin WhatsApp
+            </button>
+        </a>
+
+        <div class="notice">
+            <p>
+                SILAKAN SERTAKAN BUKTI TF KE ADMIN.<br><br>
+                JIKA TIDAK ADA BUKTI TF MAKA TRANSAKSI DIANGGAP TIDAK VALID.<br><br>
+                TERIMA KASIH TELAH BERTRANSAKSI DI SHADOW KERNEL PAYMENT. 😝✅
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<script>
+setTimeout(()=>{
+    document.getElementById("loader").style.display="none";
+},3000);
+
+function copyDana(){
+    let nomor = "083182386351";
+
+    navigator.clipboard.writeText(nomor);
+
+    let popup = document.getElementById("popup");
+    popup.style.display="block";
+    popup.innerHTML="✅ Nomor DANA Berhasil Disalin:<br>"+nomor;
+
+    setTimeout(()=>{
+        popup.style.display="none";
+    },3000);
+}
+</script>
+
+</body>
+</html>
